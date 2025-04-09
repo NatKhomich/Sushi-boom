@@ -1,10 +1,9 @@
-import { Button } from "@/components/ui/button";
+import { Header } from "@/components/shared/header";
 
 export default function Home() {
   return (
     <div>
-     My home page
-     <Button variant="default">My button</Button>
+      
     </div>
   );
 }
