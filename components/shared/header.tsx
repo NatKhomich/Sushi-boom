@@ -12,7 +12,7 @@ interface Props {
 export const Header = ({ className }: Props) => {
   return (
     <header className={cn("", className)}>
-      <Container className="flex items-center justify-between py-8">
+      <Container className="flex items-center justify-between py-8 gap-2">
         <div className="flex gap-2">
           <Image src="/logo.png" alt="Logo" width={45} height={45} />
           <div>
@@ -22,8 +22,8 @@ export const Header = ({ className }: Props) => {
             </p>
           </div>
         </div>
-        <div className="w-100">
-          <Input placeholder="Поиск" />
+        <div className="flex-1 min-w-0 max-w-md">
+          <Input placeholder="Поиск" className="w-full" />
         </div>
 
         <div className="flex items-center gap-2">
