@@ -1,3 +1,5 @@
+
+
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { Title } from "./title";
@@ -13,7 +15,7 @@ interface Props {
 export const ProductCard = ({ item, className }: Props) => {
   const { id, imageUrl, name, price } = item;
   return (
-    <div className={cn("shadow-2xs p-3 border-2 border-primary", className)}>
+    <div className={cn("shadow-2xs p-3", className)}>
       <Link href={`/product/${id}`}>
         <div className="flex justify-center p-6 bg-secondary rounded-lg h-[260px]">
           {imageUrl && (
@@ -30,7 +32,7 @@ export const ProductCard = ({ item, className }: Props) => {
         </Title>
 
         <div className="flex justify-between">
-          <span className="text-[20px]">{price}р</span>
+          <span className="text-[20px]">от {price}р</span>
 
           <Button variant="outline" className="text-base font-bold ml-2">
             <Plus size={20} className=" mr-1" />

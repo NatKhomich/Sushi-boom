@@ -11,7 +11,7 @@ export const TopBar = ({ className }: Props) => {
   return (
     <div
       className={cn(
-        "sticky top-0 py-3 shadow-black/5 z-10 flex items-center justify-between bg-background",
+        "sticky top-0 py-3 z-10 flex items-center justify-between bg-background",
         className
       )}
     >

@@ -11,7 +11,7 @@ export interface Item {
   imageUrl: string | null;
 }
 
-const items: Item[] = [
+const itemsRolls: Item[] = [
   {
     id: "4",
     name: "Филадельфия",
@@ -51,7 +51,9 @@ export default function Home() {
 
       <TopBar />
 
-      <ProductsGroupList items={items} title="Роллы" />
+      <ProductsGroupList items={itemsRolls} title="Роллы" categoryId={1} />
+
+      <ProductsGroupList items={itemsRolls} title="Cеты" categoryId={2} />
     </Container>
   );
 }

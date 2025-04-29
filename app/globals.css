@@ -112,6 +112,20 @@
   --sidebar-ring: oklch(0.645 0.246 16.439);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+@media screen and (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+.scroll-target {
+  scroll-margin-top: 70px;
+}
+
 @layer base {
   * {
     margin: 0;
