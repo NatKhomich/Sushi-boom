@@ -3,7 +3,9 @@ import React from "react";
 import { Container } from "./container";
 import Image from "next/image";
 import { Button, Input } from "../ui";
-import { ArrowRight, ShoppingCart, User } from "lucide-react";
+import { ArrowRight, Search, ShoppingCart, User } from "lucide-react";
+import { SearchInput } from "./search-input";
+import Link from "next/link";
 
 interface Props {
   className?: string;
@@ -13,7 +15,7 @@ export const Header = ({ className }: Props) => {
   return (
     <header className={cn("", className)}>
       <Container className="flex items-center justify-between py-8 gap-2">
-        <div className="flex gap-2">
+        <Link href='/' className="flex gap-2 cursor-pointer ">
           <Image src="/logo.png" alt="Logo" width={45} height={45} />
           <div>
             <h1 className="text-2xl font-black">Sushi BOOM</h1>
@@ -21,9 +23,9 @@ export const Header = ({ className }: Props) => {
               лучшие суши и роллы
             </p>
           </div>
-        </div>
-        <div className="flex-1 min-w-0 max-w-md">
-          <Input placeholder="Поиск" className="w-full" />
+        </Link>
+        <div className="relative flex-1 mx-3">
+          <SearchInput className="w-full" />
         </div>
 
         <div className="flex items-center gap-2">

@@ -53,7 +53,7 @@ export default function Home() {
 
       <ProductsGroupList items={itemsRolls} title="Роллы" categoryId={1} />
 
-      <ProductsGroupList items={itemsRolls} title="Cеты" categoryId={2} />
+      {/* <ProductsGroupList items={itemsRolls} title="Cеты" categoryId={2} /> */}
     </Container>
   );
 }

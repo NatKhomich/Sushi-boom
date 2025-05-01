@@ -6,3 +6,4 @@ export { SortPopup } from "./sort-popup";
 export { TopBar } from "./top-bar";
 export { ProductCard } from "./product-card";
 export { ProductsGroupList } from "./products-group-list";
+export { SearchInput } from "./search-input";

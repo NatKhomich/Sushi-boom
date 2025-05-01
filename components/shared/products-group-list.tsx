@@ -6,6 +6,7 @@ import { useIntersection } from "react-use";
 import { Title } from "./title";
 import { useEffect, useRef } from "react";
 import { useCategoryStore } from "@/app/store/category";
+import { Api } from "@/services/api-client";
 
 interface Props {
   items: Item[];
@@ -32,6 +33,14 @@ export const ProductsGroupList = ({
       setActiveCategoryId(categoryId);
     }
   }, [intersection?.isIntersecting, title]);
+
+  useEffect(() => {
+    const getProducts = async () => {
+      const res = await Api.products.getProducts();
+      console.log("res", res);
+    };
+    getProducts();
+  }, []);
 
   return (
     <div
