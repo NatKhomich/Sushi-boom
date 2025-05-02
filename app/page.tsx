@@ -4,6 +4,7 @@ import {
   Title,
   TopBar,
 } from "@/components/shared";
+import { prisma } from "@/prisma/prisma";
 export interface Item {
   id: string;
   name: string;
@@ -11,49 +12,33 @@ export interface Item {
   imageUrl: string | null;
 }
 
-const itemsRolls: Item[] = [
-  {
-    id: "4",
-    name: "Филадельфия",
-    price: 350,
-    imageUrl:
-      "https://static.tildacdn.com/stor3266-3237-4461-b138-363734313739/16114379.jpg",
-  },
-  {
-    id: "1",
-    name: "Филадельфия",
-    price: 350,
-    imageUrl:
-      "https://static.tildacdn.com/stor3266-3237-4461-b138-363734313739/16114379.jpg",
-  },
-  {
-    id: "2",
-    name: "Филадельфия",
-    price: 350,
-    imageUrl:
-      "https://static.tildacdn.com/stor3266-3237-4461-b138-363734313739/16114379.jpg",
-  },
-  {
-    id: "3",
-    name: "Филадельфия",
-    price: 350,
-    imageUrl:
-      "https://static.tildacdn.com/stor3266-3237-4461-b138-363734313739/16114379.jpg",
-  },
-];
+export default async function Home() {
+  const categories = await prisma.category.findMany({
+    include: {
+      products: {
+        include: {
+          items: true,
+        },
+      },
+    },
+  });
 
-export default function Home() {
   return (
     <Container className="mt-5">
       <Title size="md" className="font-extrabold ">
         Все товары
       </Title>
 
-      <TopBar />
+      <TopBar categories={categories} />
 
-      <ProductsGroupList items={itemsRolls} title="Роллы" categoryId={1} />
-
-      {/* <ProductsGroupList items={itemsRolls} title="Cеты" categoryId={2} /> */}
+      {categories.map((category) => (
+        <ProductsGroupList
+          key={category.id}
+          categoryId={category.id}
+          title={category.name}
+          items={category.products}
+        />
+      ))}
     </Container>
   );
 }

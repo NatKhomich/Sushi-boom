@@ -2,12 +2,14 @@ import { cn } from "@/lib/utils";
 import { Container } from "./container";
 import { Categories } from "./categories";
 import { SortPopup } from "./sort-popup";
+import { Category } from "@prisma/client";
 
 interface Props {
+  categories: Category[];
   className?: string;
 }
 
-export const TopBar = ({ className }: Props) => {
+export const TopBar = ({ categories, className }: Props) => {
   return (
     <div
       className={cn(
@@ -15,7 +17,7 @@ export const TopBar = ({ className }: Props) => {
         className
       )}
     >
-      <Categories />
+      <Categories categories={categories} />
 
       <SortPopup />
     </div>

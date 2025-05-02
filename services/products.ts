@@ -9,10 +9,3 @@ export const search = async (query: string) => {
 
   return res.data;
 };
-
-
-export const getProducts = async () => {
-  const res = await axiosInstance.get<Product[]>(ApiRoutes.PRODUCTS);
-
-  return res.data;
-};
