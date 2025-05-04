@@ -2,8 +2,8 @@ import { cn } from "@/lib/utils";
 import React from "react";
 import { Container } from "./container";
 import Image from "next/image";
-import { Button, Input } from "../ui";
-import { ArrowRight, Search, ShoppingCart, User } from "lucide-react";
+import { Button } from "../ui";
+import { ArrowRight, ShoppingCart, User } from "lucide-react";
 import { SearchInput } from "./search-input";
 import Link from "next/link";
 

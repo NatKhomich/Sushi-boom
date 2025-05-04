@@ -15,7 +15,6 @@ interface Props {
 }
 
 export const ProductCard = ({ item, className }: Props) => {
-  console.log(item);
   const { id, imageUrl, name } = item;
   return (
     <div className={cn("shadow-2xs p-3", className)}>
@@ -25,7 +24,7 @@ export const ProductCard = ({ item, className }: Props) => {
             <img
               src={imageUrl || ""}
               alt="product"
-              className="w-[215px] h-[215px]"
+              className="w-[215px] h-[215px] object-cover"
             />
           )}
         </div>
