@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { Product } from "@prisma/client";
 import { DialogContent, DialogTitle } from "../ui/dialog";
 import { useRouter } from "next/navigation";
-
+import { ProductDetailsForm } from "./product-details-form";
 
 interface Props {
   product: Product;
@@ -19,11 +19,13 @@ export const ProductModal = ({ product, className }: Props) => {
     <Dialog open={Boolean(product)} onOpenChange={() => router.back()}>
       <DialogContent
         className={cn(
-          "p-0 w-[1060px] max-w-[1060px] min-h-[500px] bg-secondary/20 overflow-hidden",
+          "flex flex-col md:min-w-2xl min-h-[500px] bg-secondary overflow-hidden border-2 rounded-xl border-primary/10 p-0",
           className
         )}
       >
-        <DialogTitle>{product.name} </DialogTitle>
+        <DialogTitle></DialogTitle>
+
+        <ProductDetailsForm product={product} />
       </DialogContent>
     </Dialog>
   );

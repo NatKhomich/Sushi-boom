@@ -8,28 +8,28 @@ datasource db {
 }
 
 model User {
-     id        Int   @id @default(autoincrement())
-    name      String?
-    email     String?  @unique
-    password  String?
+    id       Int     @id @default(autoincrement())
+    name     String?
+    email    String? @unique
+    password String?
 
-    role      UserRole @default(USER)
+    role UserRole @default(USER)
 
     provider   String?
     providerId String?
 
-    cart Cart?
-    orders Order[]
+    cart             Cart?
+    orders           Order[]
     verificationCode VerificationCode?
-    verified DateTime @default(now())
+    verified         DateTime          @default(now())
 
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 }
 
 model Category {
-    id        Int   @id @default(autoincrement())
-    name String
+    id       Int       @id @default(autoincrement())
+    name     String
     products Product[]
 
     createdAt DateTime @default(now())
@@ -37,14 +37,14 @@ model Category {
 }
 
 model Product {
-    id        Int   @id @default(autoincrement())
-    name String
-    imageUrl String
+    id          Int    @id @default(autoincrement())
+    name        String
+    imageUrl    String
     description String
 
     items ProductItem[]
 
-    category Category @relation(fields: [categoryId], references: [id])
+    category   Category @relation(fields: [categoryId], references: [id])
     categoryId Int
 
     createdAt DateTime @default(now())
@@ -52,14 +52,14 @@ model Product {
 }
 
 model ProductItem {
-    id        Int   @id @default(autoincrement())
+    id   Int    @id @default(autoincrement())
     name String
 
     price Int
-    size Int?
+    size  Int?
 
-    product Product @relation(fields: [productId], references: [id])
-    productId Int   
+    product   Product @relation(fields: [productId], references: [id])
+    productId Int
 
     cartItems CartItem[]
 
@@ -68,10 +68,10 @@ model ProductItem {
 }
 
 model Cart {
-     id        Int   @id @default(autoincrement())
+    id Int @id @default(autoincrement())
 
-    user User? @relation(fields: [userId], references: [id])
-    userId Int? @unique
+    user   User? @relation(fields: [userId], references: [id])
+    userId Int?  @unique
 
     totalPrice Int @default(0)
 
@@ -84,12 +84,12 @@ model Cart {
 }
 
 model CartItem {
-     id        Int   @id @default(autoincrement())
+    id Int @id @default(autoincrement())
 
-    cart Cart? @relation(fields: [cartId], references: [id])
+    cart   Cart? @relation(fields: [cartId], references: [id])
     cartId Int?
 
-    productItem ProductItem @relation(fields: [productItemId], references: [id])
+    productItem   ProductItem @relation(fields: [productItemId], references: [id])
     productItemId Int
 
     quantity Int @default(1)
@@ -99,24 +99,24 @@ model CartItem {
 }
 
 model Order {
-     id        Int   @id @default(autoincrement())
+    id Int @id @default(autoincrement())
 
-    user User? @relation(fields: [userId], references: [id])
+    user   User? @relation(fields: [userId], references: [id])
     userId Int?
 
     token String
 
     totalPrice Int
 
-    status OrderStatus
+    status    OrderStatus
     paymentId String?
 
-    items Json 
+    items Json
 
-    name String
+    name    String
     address String
-    phone String
-    email String
+    phone   String
+    email   String
     comment String?
 
     createdAt DateTime @default(now())
@@ -124,10 +124,10 @@ model Order {
 }
 
 model VerificationCode {
-     id        Int   @id @default(autoincrement())
+    id Int @id @default(autoincrement())
 
-    user User? @relation(fields: [userId], references: [id])
-    userId Int @unique
+    user   User? @relation(fields: [userId], references: [id])
+    userId Int   @unique
 
     code String
 
