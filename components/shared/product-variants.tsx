@@ -21,7 +21,6 @@ export const ProductVariants = ({
   onChangeVariant,
   className,
 }: Props) => {
-  console.log(selectedValue);
 
   return (
     <div

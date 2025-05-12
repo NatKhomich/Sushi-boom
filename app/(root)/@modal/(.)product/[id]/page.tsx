@@ -1,4 +1,4 @@
-import { ProductModal, Title } from "@/components/shared";
+import { ProductModal } from "@/components/shared";
 import { prisma } from "@/prisma/prisma";
 import { notFound } from "next/navigation";
 

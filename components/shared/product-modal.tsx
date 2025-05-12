@@ -2,13 +2,13 @@
 
 import { Dialog } from "../ui";
 import { cn } from "@/lib/utils";
-import { Product } from "@prisma/client";
 import { DialogContent, DialogTitle } from "../ui/dialog";
 import { useRouter } from "next/navigation";
 import { ProductDetailsForm } from "./product-details-form";
+import { ProductWithItems } from "./product-card";
 
 interface Props {
-  product: Product;
+  product: ProductWithItems;
   className?: string;
 }
 
@@ -19,7 +19,7 @@ export const ProductModal = ({ product, className }: Props) => {
     <Dialog open={Boolean(product)} onOpenChange={() => router.back()}>
       <DialogContent
         className={cn(
-          "flex flex-col md:min-w-2xl min-h-[500px] bg-secondary overflow-hidden border-2 rounded-xl border-primary/10 p-0",
+          "flex flex-col md:min-w-2xl h-[400px] p-3 bg-secondary overflow-hidden border-2 rounded-xl border-primary/10",
           className
         )}
       >
