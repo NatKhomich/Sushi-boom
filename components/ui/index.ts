@@ -4,3 +4,4 @@ export { Dialog } from "./dialog";
 export { Drawer } from "./drawer";
 export { Input } from "./input";
 export { Popover } from "./popover";
+export { Sheet } from "./sheet";

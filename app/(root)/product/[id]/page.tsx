@@ -1,6 +1,5 @@
-import { Container, ProductImage, Title } from "@/components/shared";
+import { Container } from "@/components/shared";
 import { ProductDetailsForm } from "@/components/shared/product-details-form";
-import { ProductVariants } from "@/components/shared/product-variants";
 import { prisma } from "@/prisma/prisma";
 import { notFound } from "next/navigation";
 

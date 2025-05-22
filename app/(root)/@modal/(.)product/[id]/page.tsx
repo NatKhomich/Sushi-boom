@@ -14,7 +14,6 @@ export default async function ProductModalPage({
       items: true,
     },
   });
-
   if (!product) {
     return notFound();
   }

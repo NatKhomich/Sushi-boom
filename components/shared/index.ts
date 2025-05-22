@@ -10,3 +10,4 @@ export { SearchInput } from "./search-input";
 export { ProductImage } from "./product-image";
 export { ProductVariants } from "./product-variants";
 export { ProductModal } from "./product-modal";
+export { CartButton } from "./cart-button";

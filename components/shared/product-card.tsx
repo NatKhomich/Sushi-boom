@@ -18,7 +18,7 @@ export const ProductCard = ({ item, className }: Props) => {
   const { id, imageUrl, name } = item;
   return (
     <div className={cn("shadow-2xs p-3", className)}>
-      <Link href={`/product/${id}`}>
+      <Link href={`/product/${id}`} >
         <div className="flex justify-center p-6 bg-primary/5 rounded-lg h-[260px]">
           {imageUrl && (
             <img

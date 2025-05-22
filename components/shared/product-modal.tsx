@@ -3,7 +3,7 @@
 import { Dialog } from "../ui";
 import { cn } from "@/lib/utils";
 import { DialogContent, DialogTitle } from "../ui/dialog";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { ProductDetailsForm } from "./product-details-form";
 import { ProductWithItems } from "./product-card";
 
