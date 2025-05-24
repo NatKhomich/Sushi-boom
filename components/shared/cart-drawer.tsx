@@ -8,6 +8,8 @@ import {
   SheetTrigger,
 } from "../ui/sheet";
 import { ArrowRight } from "lucide-react";
+import { CartDrawerItem } from "./cart-drawer-item";
+import clsx from "clsx";
 
 interface Props {
   className?: string;
@@ -15,15 +17,21 @@ interface Props {
 }
 
 export const CartDrawer = ({ children, className }: Props) => {
+  const totalAmount = 2;
   return (
     <Sheet>
-      <SheetTrigger>{children}</SheetTrigger>
-      <SheetContent className="flex flex-col justify-between pb-0 bg-blend-color">
+      <SheetTrigger asChild>{children}</SheetTrigger>
+      <SheetContent className="flex flex-col justify-between pb-0 bg-accent">
+        <div className={clsx('flex flex-col h-full', !totalAmount && 'justify-center')}>
         <SheetHeader>
           <SheetTitle>
             В корзине <span className="font-bold">3 товара</span>
           </SheetTitle>
         </SheetHeader>
+        <div className="-mx-4 mt-5 overflow-auto flex-1">
+          <CartDrawerItem />
+          <CartDrawerItem />
+        </div>
 
         <SheetFooter className="-mx-6 p-8">
           <div className="w-full">
@@ -37,12 +45,13 @@ export const CartDrawer = ({ children, className }: Props) => {
 
             <Link href="/cart">
               <Button type="submit" className="w-full h-12 text-base">
-                Офорить заказ
+                Оформить заказ
                 <ArrowRight className="w-5 ml-2" />
               </Button>
             </Link>
           </div>
         </SheetFooter>
+        </div>
       </SheetContent>
     </Sheet>
   );

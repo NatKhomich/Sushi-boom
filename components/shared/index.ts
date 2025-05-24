@@ -11,3 +11,7 @@ export { ProductImage } from "./product-image";
 export { ProductVariants } from "./product-variants";
 export { ProductModal } from "./product-modal";
 export { CartButton } from "./cart-button";
+export { CountIconButton } from "./count-icon-button";
+export { CartDrawer } from "./cart-drawer";
+export { CartDrawerItem } from "./cart-drawer-item";
+export { CountButton } from "./count-button";
