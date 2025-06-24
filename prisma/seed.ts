@@ -58,6 +58,40 @@ async function up() {
   await prisma.productItem.createMany({
     data: productItems,
   });
+
+  const users = await prisma.user.findMany();
+  const items = await prisma.productItem.findMany();
+
+  for (const user of users) {
+    const cart = await prisma.cart.create({
+      data: {
+        userId: user.id,
+        token: `token-${user.id}`,
+      },
+    });
+
+    let totalPrice = 0;
+
+    const randomItems = items.sort(() => 0.5 - Math.random()).slice(0, 3);
+
+    for (const item of randomItems) {
+      const quantity = Math.floor(Math.random() * 3) + 1;
+      totalPrice += item.price * quantity;
+
+      await prisma.cartItem.create({
+        data: {
+          cartId: cart.id,
+          productItemId: item.id,
+          quantity,
+        },
+      });
+    }
+
+    await prisma.cart.update({
+      where: { id: cart.id },
+      data: { totalPrice },
+    });
+  }
 }
 
 async function down() {
