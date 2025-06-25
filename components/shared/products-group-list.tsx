@@ -4,7 +4,7 @@ import { ProductCard, ProductWithItems } from "./product-card";
 import { useIntersection } from "react-use";
 import { Title } from "./title";
 import { useEffect, useRef } from "react";
-import { useCategoryStore } from "@/app/store/category";
+import { useCategoryStore } from "@/app/store";
 
 interface Props {
   items: ProductWithItems[];

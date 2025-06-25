@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { Button, Sheet } from "../ui";
 import {
@@ -10,6 +12,8 @@ import {
 import { ArrowRight } from "lucide-react";
 import { CartDrawerItem } from "./cart-drawer-item";
 import clsx from "clsx";
+import { useCartStore } from "@/app/store";
+import { useEffect } from "react";
 
 interface Props {
   className?: string;
@@ -17,6 +21,14 @@ interface Props {
 }
 
 export const CartDrawer = ({ children, className }: Props) => {
+  const fetchCartItems = useCartStore((state) => state.fetchCartItems);
+  const totalPrice = useCartStore((state) => state.totalPrice);
+  const items = useCartStore((state) => state.items);
+
+  useEffect(() => {
+    fetchCartItems();
+  }, []);
+
   const totalAmount = 2;
   return (
     <Sheet>
@@ -34,70 +46,18 @@ export const CartDrawer = ({ children, className }: Props) => {
             </SheetTitle>
           </SheetHeader>
           <div className="-mx-4 mt-5 overflow-auto flex-1">
-            <CartDrawerItem
-              details="8шт"
-              id="1"
-              imageUrl="/products/rolls/filadelfiya-sashimi.png"
-              name="Фила"
-              price={250}
-              quantity={2}
-            />
-            <CartDrawerItem
-              details="8шт"
-              id="1"
-              imageUrl="/products/rolls/filadelfiya-sashimi.png"
-              name="Фила"
-              price={250}
-              quantity={2}
-            />
-            <CartDrawerItem
-              details="8шт"
-              id="1"
-              imageUrl="/products/rolls/filadelfiya-sashimi.png"
-              name="Фила"
-              price={250}
-              quantity={2}
-            />
-            <CartDrawerItem
-              details="8шт"
-              id="1"
-              imageUrl="/products/rolls/filadelfiya-sashimi.png"
-              name="Фила"
-              price={250}
-              quantity={2}
-            />
-            <CartDrawerItem
-              details="8шт"
-              id="1"
-              imageUrl="/products/rolls/filadelfiya-sashimi.png"
-              name="Фила"
-              price={250}
-              quantity={2}
-            />
-            <CartDrawerItem
-              details="8шт"
-              id="1"
-              imageUrl="/products/rolls/filadelfiya-sashimi.png"
-              name="Фила"
-              price={250}
-              quantity={2}
-            />
-            <CartDrawerItem
-              details="8шт"
-              id="1"
-              imageUrl="/products/rolls/filadelfiya-sashimi.png"
-              name="Фила"
-              price={250}
-              quantity={2}
-            />
-            <CartDrawerItem
-              details="8шт"
-              id="1"
-              imageUrl="/products/rolls/filadelfiya-sashimi.png"
-              name="Фила"
-              price={250}
-              quantity={2}
-            />
+            {items.map((item) => (
+              <CartDrawerItem
+                key={item.id}
+                id={item.id}
+                imageUrl={item.imageUrl}
+                name={item.name}
+                price={item.price}
+                quantity={item.quantity}
+                description={item.description}
+                size={item.size}
+              />
+            ))}
           </div>
 
           <SheetFooter className="-mx-6 p-8">
@@ -107,7 +67,7 @@ export const CartDrawer = ({ children, className }: Props) => {
                   Итого
                   <div className="flex-1 border-b border-dashed border-b-neutral-200 relative -top-1 mx-2" />
                 </span>
-                <span className="font-bold text-lg">500p</span>
+                <span className="font-bold text-lg">{totalPrice}р</span>
               </div>
 
               <Link href="/cart">

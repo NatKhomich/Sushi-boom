@@ -1,13 +1,18 @@
+"use client";
+
 import { ArrowRight, ShoppingCart } from "lucide-react";
 import { Button } from "../ui";
 import { cn } from "@/lib/utils";
 import { CartDrawer } from "./cart-drawer";
+import { useCartStore } from "@/app/store";
 
 interface Props {
   className?: string;
 }
 
 export const CartButton = ({ className }: Props) => {
+  const totalPrice = useCartStore((state) => state.totalPrice);
+  const items = useCartStore((state) => state.items);
   return (
     <CartDrawer>
       <Button
@@ -15,11 +20,11 @@ export const CartButton = ({ className }: Props) => {
         className={cn("group relative cursor-pointer", className)}
       >
         <div>
-          <b>520 ₽</b>
+          <b>{totalPrice} ₽</b>
           <span className="h-full w-[1px] bg-white/30 mx-3" />
           <div className="flex items-center gap-1 transition duration-300 group-hover:opacity-0">
             <ShoppingCart size={16} className="relative" strokeWidth={2} />
-            <b>3</b>
+            <b>{items.length}</b>
           </div>
           <ArrowRight
             size={20}

@@ -8,21 +8,23 @@ import { CountButton } from "./count-button";
 import { Trash2Icon } from "lucide-react";
 
 interface Props {
-  id: string;
+  id: number;
   imageUrl: string;
   name: string;
-  details: string;
   price: number;
   quantity: number;
+  description: string;
+  size: number | null;
   className?: string;
 }
 
 export const CartDrawerItem = ({
   id,
-  details,
   imageUrl,
+  description,
   name,
   price,
+  size,
   quantity,
   className,
 }: Props) => {
@@ -31,7 +33,7 @@ export const CartDrawerItem = ({
       <CartItemImage src={imageUrl} className="rounded-lg" />
       <div className="w-full">
         <div className="flex items-center gap-3">
-          <CartItemInfo name={name} />
+          <CartItemInfo name={name} description={description} size={size} />
         </div>
 
         <hr className="my-3" />
@@ -41,7 +43,10 @@ export const CartDrawerItem = ({
 
           <div className="flex items-center gap-2">
             <CartItemPrice price={price} />
-            <Trash2Icon size={20} className="text-gray-400 cursor-pointer hover:text-gray-600" />
+            <Trash2Icon
+              size={20}
+              className="text-gray-400 cursor-pointer hover:text-gray-600"
+            />
           </div>
         </div>
       </div>
