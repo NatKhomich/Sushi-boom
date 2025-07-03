@@ -7,6 +7,8 @@ import { ProductImage } from "./product-image";
 import { ProductVariants } from "./product-variants";
 import { useState } from "react";
 import { ProductWithItems } from "./product-card";
+import { useCartStore } from "@/app/store";
+import { useRouter } from "next/navigation";
 
 interface Props {
   product: ProductWithItems;
@@ -15,6 +17,9 @@ interface Props {
 
 export const ProductDetailsForm = ({ product, className }: Props) => {
   const { name, description, imageUrl, categoryId } = product;
+  const addCartItem = useCartStore((state) => state.addCartItem);
+
+  const router = useRouter();
 
   const [quantity, setQuantity] = useState("4");
 
@@ -23,12 +28,26 @@ export const ProductDetailsForm = ({ product, className }: Props) => {
     product.items[0].price;
 
   const handleAddToCart = () => {
-    console.log({
-      id: product.id,
-      quantity,
-      price: currentPrice,
-      name,
+    let selectedItem;
+
+    if (product.categoryId === 1) {
+      selectedItem = product.items.find((i) => i.size === +quantity);
+    } else {
+      selectedItem = product.items[0];
+    }
+
+    if (!selectedItem) {
+      console.error("Не найден соответствующий productItem");
+      return;
+    }
+
+    addCartItem({
+      productItemId: selectedItem.id,
+      quantity: product.categoryId === 1 ? +quantity : 1,
+      size: product.categoryId === 1 ? +quantity : undefined,
     });
+
+    router.back();
   };
 
   return (

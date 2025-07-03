@@ -3,7 +3,7 @@
 import { Dialog } from "../ui";
 import { cn } from "@/lib/utils";
 import { DialogContent, DialogTitle } from "../ui/dialog";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { ProductDetailsForm } from "./product-details-form";
 import { ProductWithItems } from "./product-card";
 
@@ -23,7 +23,7 @@ export const ProductModal = ({ product, className }: Props) => {
           className
         )}
       >
-        <DialogTitle></DialogTitle>
+        <DialogTitle />
 
         <ProductDetailsForm product={product} />
       </DialogContent>

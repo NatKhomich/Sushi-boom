@@ -21,41 +21,56 @@ interface Props {
 }
 
 export const CartDrawer = ({ children, className }: Props) => {
-  const fetchCartItems = useCartStore((state) => state.fetchCartItems);
-  const totalPrice = useCartStore((state) => state.totalPrice);
   const items = useCartStore((state) => state.items);
+  const totalPrice = useCartStore((state) => state.totalPrice);
+  const fetchCartItems = useCartStore((state) => state.fetchCartItems);
+  const changeItemQuantity = useCartStore((state) => state.changeItemQuantity);
+  const removeCartItem = useCartStore((state) => state.removeCartItem);
 
   useEffect(() => {
     fetchCartItems();
   }, []);
 
-  const totalAmount = 2;
+  const handleUpdateQuantity = (
+    id: number,
+    quantity: number,
+    type: "plus" | "minus"
+  ) => {
+    const newQuantity = type === "plus" ? quantity + 1 : quantity - 1;
+    changeItemQuantity(id, newQuantity);
+  };
+
+  const handleDeleteItem = (id: number) => {
+    removeCartItem(id);
+  };
+
   return (
     <Sheet>
       <SheetTrigger asChild>{children}</SheetTrigger>
-      <SheetContent className="flex flex-col justify-between pb-0 bg-accent">
+      <SheetContent
+        className={clsx(
+          "flex flex-col justify-between pb-0 bg-accent",
+          className
+        )}
+      >
         <div
           className={clsx(
             "flex flex-col h-full",
-            !totalAmount && "justify-center"
+            !items.length && "justify-center"
           )}
         >
           <SheetHeader>
             <SheetTitle>
-              В корзине <span className="font-bold">3 товара</span>
+              В корзине <span className="font-bold">{items.length} товара</span>
             </SheetTitle>
           </SheetHeader>
           <div className="-mx-4 mt-5 overflow-auto flex-1">
             {items.map((item) => (
               <CartDrawerItem
                 key={item.id}
-                id={item.id}
-                imageUrl={item.imageUrl}
-                name={item.name}
-                price={item.price}
-                quantity={item.quantity}
-                description={item.description}
-                size={item.size}
+                cartItem={item}
+                onUpdateQuantity={handleUpdateQuantity}
+                onDeleteItem={handleDeleteItem}
               />
             ))}
           </div>
