@@ -13,7 +13,16 @@ export default async function ProductPage({
   const product = await prisma.product.findFirst({
     where: { id: +id },
     include: {
-      items: true,
+      category: {
+        include: {
+          products: {
+            include: {
+              items: true,
+            }
+          }
+        }
+      },
+      items: true
     },
   });
 

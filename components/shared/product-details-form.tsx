@@ -9,6 +9,7 @@ import { useState } from "react";
 import { ProductWithItems } from "./product-card";
 import { useCartStore } from "@/app/store";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 interface Props {
   product: ProductWithItems;
@@ -18,6 +19,7 @@ interface Props {
 export const ProductDetailsForm = ({ product, className }: Props) => {
   const { name, description, imageUrl, categoryId } = product;
   const addCartItem = useCartStore((state) => state.addCartItem);
+  const loading = useCartStore((state) => state.loading);
 
   const router = useRouter();
 
@@ -27,7 +29,7 @@ export const ProductDetailsForm = ({ product, className }: Props) => {
     product.items.find((i) => i.size === +quantity)?.price ||
     product.items[0].price;
 
-  const handleAddToCart = () => {
+  const handleAddToCart = async () => {
     let selectedItem;
 
     if (product.categoryId === 1) {
@@ -40,14 +42,17 @@ export const ProductDetailsForm = ({ product, className }: Props) => {
       console.error("Не найден соответствующий productItem");
       return;
     }
-
-    addCartItem({
-      productItemId: selectedItem.id,
-      quantity: product.categoryId === 1 ? +quantity : 1,
-      size: product.categoryId === 1 ? +quantity : undefined,
-    });
-
-    router.back();
+    try {
+      await addCartItem({
+        productItemId: selectedItem.id,
+        quantity: product.categoryId === 1 ? +quantity : 1,
+        size: product.categoryId === 1 ? +quantity : undefined,
+      });
+      toast.success("Товар успешно добавлен в корзину");
+      router.back();
+    } catch (error) {
+      toast.error("Ошибка при добавлении товара в корзину");
+    }
   };
 
   return (
@@ -83,6 +88,7 @@ export const ProductDetailsForm = ({ product, className }: Props) => {
         </div>
 
         <Button
+          loading={loading}
           onClick={handleAddToCart}
           className="h-[55px] text-base rounded-s-md w-full mt-5"
         >

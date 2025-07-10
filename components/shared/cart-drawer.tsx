@@ -69,6 +69,7 @@ export const CartDrawer = ({ children, className }: Props) => {
               <CartDrawerItem
                 key={item.id}
                 cartItem={item}
+                disabled={item.disabled}
                 onUpdateQuantity={handleUpdateQuantity}
                 onDeleteItem={handleDeleteItem}
               />

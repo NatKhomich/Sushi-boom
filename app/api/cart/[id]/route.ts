@@ -62,7 +62,7 @@ export async function DELETE(
   { params }: { params: { id: string } }
 ) {
   try {
-    const id = +params.id;
+    const { id } = await params;
     const token = request.cookies.get("token")?.value;
 
     console.log("[CART DELETE]", { id, token });
@@ -76,7 +76,7 @@ export async function DELETE(
 
     const cartItem = await prisma.cartItem.findFirst({
       where: {
-        id,
+        id: +id,
       },
     });
 
@@ -89,7 +89,7 @@ export async function DELETE(
 
     await prisma.cartItem.delete({
       where: {
-        id,
+        id: +id,
       },
     });
 

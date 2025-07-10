@@ -10,6 +10,7 @@ import { CartItemView } from "@/lib/get-cart-details";
 
 interface Props {
   cartItem: CartItemView;
+  disabled?: boolean;
   className?: string;
   onUpdateQuantity: (
     id: number,
@@ -21,6 +22,7 @@ interface Props {
 
 export const CartDrawerItem = ({
   cartItem: { id, imageUrl, name, price, quantity, description, size },
+  disabled,
   className,
   onUpdateQuantity,
   onDeleteItem,
@@ -29,7 +31,13 @@ export const CartDrawerItem = ({
     onUpdateQuantity(id, quantity, type);
   };
   return (
-    <div className={cn("flex gap-4 mt-4 p-2 rounded-xl bg-white", className)}>
+    <div
+      className={cn(
+        "flex gap-4 mt-4 p-2 rounded-xl bg-white",
+        { "opacity-50 pointer-events-none": disabled },
+        className
+      )}
+    >
       <CartItemImage src={imageUrl} className="rounded-lg" />
       <div className="w-full">
         <div className="flex items-center gap-3">

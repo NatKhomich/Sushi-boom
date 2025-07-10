@@ -9,6 +9,7 @@ export interface CartItemView {
   price: number;
   size: number | null;
   description: string;
+  disabled: boolean;
 }
 
 interface ReturnType {
@@ -20,6 +21,7 @@ export const getCartDetails = (data: CartDTO): ReturnType => {
   const items = data.items.map((item) => ({
     id: item.id,
     quantity: item.quantity,
+    disabled: false,
     name: item.productItem.product.name,
     imageUrl: item.productItem.product.imageUrl,
     price: calcCartItemTotalPrice(item),
